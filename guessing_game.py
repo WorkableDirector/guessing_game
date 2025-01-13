@@ -3,20 +3,20 @@ import msvcrt
 
 def play_game():
     random_number = random.randint(0, 100)
-    tries = 0   # Starting tries
+    tries = 0
 
     print("Welcome to my number guessing game!")
 
     while True:
         guess = input("Guess the number between 0 and 100: ")
 
-        if guess.lstrip('-').isdigit():  # Check if the input is a valid number including negative numbers
+        if guess.lstrip('-').isdigit():
             guess = int(guess)
-            tries += 1  # Increment tries after each guess
+            tries += 1
             if guess == random_number:
                 print("Congratulations! You've guessed the correct number!")
                 print(f"Number of tries: {tries}")
-                return  # End the function, allowing the user to choose whether to play again
+                return
             elif guess < random_number:
                 print("The number is higher. Try again.")
             else:
