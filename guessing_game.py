@@ -1,5 +1,18 @@
 import random
-import msvcrt
+
+try:
+    import msvcrt
+except ImportError:
+    msvcrt = None
+
+
+def _wait_for_exit():
+    """Wait for the user to press a key (or Enter) before exiting."""
+    if msvcrt:
+        msvcrt.getch()
+    else:
+        input()
+
 
 def play_game():
     random_number = random.randint(0, 100)
@@ -24,17 +37,18 @@ def play_game():
         else:
             print("Please enter a valid number.")
 
-print("Welcome to my number guessing game!")
-playing = input("Would you like to play? ")
+def main() -> None:
+    print("Welcome to my number guessing game!")
+    playing = input("Would you like to play? ")
 
-while playing.lower() == "yes":
-    play_game()
-    playing = input("Would you like to play again? ")
+    while playing.lower() == "yes":
+        play_game()
+        playing = input("Would you like to play again? ")
 
-print("Thank you for playing!")
+    print("Thank you for playing!")
+    print("Press Enter or any key to exit the program...")
+    _wait_for_exit()
 
-print("Press any key to exit the program...")
 
-
-# Wait for any key press to exit program
-msvcrt.getch()
+if __name__ == "__main__":
+    main()
